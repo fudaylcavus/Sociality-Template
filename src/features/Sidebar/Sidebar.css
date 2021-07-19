@@ -1,0 +1,191 @@
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar {
+    display: block;
+    position: fixed;
+    width: 300px;
+}
+
+.logo {
+    background-color: var(--logo-background-color);
+    font-size: 2em;
+    text-align: center;
+    padding: 0.3em 0.5em;
+}
+
+.subsections {
+    display: flex;
+    color: var(--passive-menu-section-color);
+    height: 100vh;
+}
+.menu {
+    width: 75%;
+    background-color: var(--primary-menu-color);
+}
+
+.menu-item {
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    min-height: 50px;
+    padding: 0 1.5em;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.menu-item div {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    z-index: 3;
+}
+.menu-item div span {
+    margin-right: 0.5em;
+    color: var(--active-menu-section-color);
+}
+
+.active-menu div span {
+    color: white;
+}
+
+
+.notification-count {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0 0.6em;
+    margin-left: 1em;
+    font-family: sans-serif;
+    font-size: 0.9em;
+}
+
+
+.menu-item.active-menu::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    transform: rotate(45deg);
+    left: 15px;
+    display: block;
+    z-index: 2;
+    aspect-ratio: 1 / 1;
+    height: 30px;
+    background-color: var(--active-menu-section-color);
+}
+
+.menu-subitems {
+    background-color: var(--secondary-menu-color);
+}
+
+.menu-subitem {
+    margin: 1em 0.5em;
+    
+}
+
+.active-subitem {
+    color: var(--active-menu-section-color);
+    font-weight: bold;
+}
+.active-subitem:before,
+.menu-subitem::before {
+    content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: var(--passive-menu-section-color); /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    /* margin-left: -1em; Also needed for space (tweak if needed) */
+}
+
+.active-subitem:before {
+    color: var(--active-menu-section-color)
+}
+
+.active-menu {
+    background-color: var(--active-menu-section-color);
+    font-weight: bold;
+}
+
+.active-menu:nth-child(0) {
+    z-index: 3;
+}
+
+.active-menu ul {
+    background-color: var(--secondary-menu-color);
+}
+
+.menu-subitems {
+    cursor: pointer;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+
+.collapse-button {
+    font-size: 2em;
+}
+
+/* Brands side styles */
+.brands {
+    flex: 0 0 25%;
+    background-color: var(--brands-background-color);
+}
+
+.brand {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-items: space-between;
+    align-items: center;
+    margin-top: 0.7em;
+    margin-bottom: 1.2em;
+    width: 100%;
+    text-align: center;
+}
+.brand-notification {
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    font-size: 12px;
+    text-align: center;
+    right: 10px;
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    z-index: 15;
+    background-color: var(--brand-notification-background-color);
+}
+.brand img {
+    opacity: 0.4;
+    border-radius: 10px;
+    width: 60%;
+    transition: all linear 200ms;
+    cursor: pointer;
+}
+
+.brand img:hover {
+    opacity: 1;
+}
+
+.active-brand div {
+    background-color: var(--active-menu-section-color);
+    position: absolute;
+    left: -55%;
+    border-radius: 7px;
+    display: inline;
+    width: 60%;
+    z-index: 3;
+    aspect-ratio: 1 / 1;
+}
+
+.active-brand img {
+    opacity: 1;
+}

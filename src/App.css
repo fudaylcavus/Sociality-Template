@@ -1,38 +1,92 @@
+:root {
+  --secondary-menu-color: #32363a;
+  --brands-background-color: #2a2f33;
+  --primary-menu-color: #393d42;
+  --logo-background-color: #31363b;
+  --published-post-color: #acacac;
+  --scheduled-post-color: #3ac183;
+  --need-approval-post-color: #f7bf38;
+  --error-post-color: #fb6450;
+  --notes-post-color: #67b1f2;
+  --posts-date-color: #b3b3b3;
+  --post-date-color: #acacac;
+  --main-background-color: #f5f7f8;
+  --hyperlink-color: #75bef0;
+  --brand-notification-background-color: #3ac1a9;
+  --active-menu-section-color: #f55661;
+  --passive-menu-section-color: #fef2f2;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-width: 100%;
+  font-family: 'Raleway', sans-serif;
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  left: 300px;
+  background-color: var(--main-background-color);
+  width: calc(100% - 300px);
+  padding: 50px;
+}
+.color-info {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.color-circle {
+  display: inline-block;
+  margin-right: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.color-info:nth-child(1) .color-circle {
+  background-color: var(--published-post-color);
+}
+
+.color-info:nth-child(2) .color-circle {
+  background-color:var(--scheduled-post-color);
+}
+
+.color-info:nth-child(3) .color-circle {
+  background-color:var(--need-approval-post-color);
+}
+
+.color-info:nth-child(4) .color-circle {
+  background-color:var(--error-post-color);
+}
+
+.color-info:nth-child(5) .color-circle {
+  background-color:var(--notes-post-color);
+}
+
+.posts-date {
+  margin-top: 1em;
+  color: var(--posts-date-color);
+  font-size: 22px;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+.profile {
+  display: block;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  top: 40px;
+  right: 150px;
+  position: absolute;
   color: white;
+  text-align: center;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profile img {
+  width: 100%;
+  height: auto;
 }
