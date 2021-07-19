@@ -29,11 +29,10 @@ export const Post = ({post}) => {
 
     const handleHyperlinkWithText = (text) => {
         const urlRegex = /(https?:\/\/[^\s]+)/g;
-        console.log(text.split(urlRegex))
         return text.split(urlRegex)
-           .map(part => {
+           .map((part, index) => {
                 if(part.match(urlRegex)) {
-                    return <a className="link" href={part}>{part}</a>;
+                    return <a key={index} className="link" href={part}>{part}</a>;
                 }
                 return part;
            });
@@ -43,15 +42,15 @@ export const Post = ({post}) => {
         switch (channel) {
             case 'facebook':
                 return (
-                    <i class="fab fa-facebook-f"></i>
+                    <i className="fab fa-facebook-f"></i>
                 )
             case 'twitter':
                 return (
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-twitter"></i>
                 )
             case 'instagrambusiness':
                 return (
-                    <i class="fab fa-instagram"></i>
+                    <i className="fab fa-instagram"></i>
                 )
             default:
                 break;
@@ -89,10 +88,10 @@ export const Post = ({post}) => {
                 <div className="post-top">
                     <p>{handleDateView()}</p>
                     <div className="post-actions">
-                        {post.status === 1 ? <i class="fas fa-ban"></i> : ""}
-                        {post.status === 0 ? <i class="fas fa-check"></i> : ""}                        
-                        <i class="far fa-trash-alt"></i>
-                        <i class="fas fa-ellipsis-h"></i>
+                        {post.status === 1 ? <i className="fas fa-ban"></i> : ""}
+                        {post.status === 0 ? <i className="fas fa-check"></i> : ""}                        
+                        <i className="far fa-trash-alt"></i>
+                        <i className="fas fa-ellipsis-h"></i>
                     </div>
                 </div>
                 <p className="post-text">{handleHyperlinkWithText(post.entry.message)}</p>
@@ -105,8 +104,8 @@ export const Post = ({post}) => {
                 <div className="interactions">
                     <div className="interaction">
                         {["twitter","instagrambusiness"].includes(post.account.channel) 
-                        ? <i class="far fa-heart"></i>
-                        : <i class="far fa-thumbs-up"></i>}
+                        ? <i className="far fa-heart"></i>
+                        : <i className="far fa-thumbs-up"></i>}
                         
                         {/* Since don't have data for it, values are hardcoded*/}
                         {post.status !== 3 
@@ -115,7 +114,7 @@ export const Post = ({post}) => {
                     </div>
 
                     <div className="interaction">
-                        <i class="far fa-comment-alt"></i>
+                        <i className="far fa-comment-alt"></i>
                         {post.status !== 3 
                         ? 0
                         : 63}
@@ -123,15 +122,15 @@ export const Post = ({post}) => {
 
                     <div className="interaction">
                         {post.account.channel === "twitter"
-                        ? <i class="fas fa-retweet"></i>
-                        : <i class="fas fa-share-alt"></i>}
+                        ? <i className="fas fa-retweet"></i>
+                        : <i className="fas fa-share-alt"></i>}
                         {post.status !== 3 
                         ? 0
                         : 4}
                     </div>
 
                     <div className="interaction">
-                        <i class="far fa-eye"></i>
+                        <i className="far fa-eye"></i>
                         {post.status !== 3 
                         ? 0
                         : 1426}

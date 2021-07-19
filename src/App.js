@@ -29,7 +29,6 @@ function App() {
       });
       if (response.ok) {
         let data = await response.json();
-        console.log(data);
         setData(data);
       }
     } catch (err) {
@@ -83,9 +82,9 @@ function App() {
           <div>
             {Object.keys(data.posts_by_date).reverse().map((date, index) => {
               return (
-                <div>
+                <div key={index}>
                   <div className="posts-date">{handleDateView(date)}</div>
-                  <PostList key={index} postlist={data.posts_by_date[date]}/>
+                  <PostList postlist={data.posts_by_date[date]}/>
                 </div>
               )
             })}
