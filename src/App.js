@@ -26,9 +26,10 @@ function App() {
   const loadPosts = async () => {
     setHasError(false);
     setIsLoading(true);
+    
+    //To longer the loading animation, fake load timeout.
     await new Promise(resolve => {
       setTimeout(() => {
-        console.log('fake load worked')
         resolve();
       }, (Math.random() * 3) * 1000)})
     
