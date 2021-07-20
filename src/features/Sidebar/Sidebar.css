@@ -13,6 +13,7 @@ li {
 
 .logo {
     background-color: var(--logo-background-color);
+    color: white;
     font-size: 2em;
     text-align: center;
     padding: 0.3em 0.5em;
@@ -143,7 +144,6 @@ li {
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-items: space-between;
     align-items: center;
     margin-top: 0.7em;
     margin-bottom: 1.2em;
@@ -160,7 +160,7 @@ li {
     top: -5px;
     width: 20px;
     height: 20px;
-    z-index: 15;
+    z-index: 5;
     background-color: var(--brand-notification-background-color);
 }
 .brand img {
@@ -175,17 +175,29 @@ li {
     opacity: 1;
 }
 
-.active-brand div {
+.active-brand::before {
+    content: "";
     background-color: var(--active-menu-section-color);
     position: absolute;
     left: -55%;
     border-radius: 7px;
     display: inline;
     width: 60%;
-    z-index: 3;
+    z-index: 5;
+    animation: selected-brand-animation 250ms;
     aspect-ratio: 1 / 1;
+}
+
+@keyframes selected-brand-animation {
+    0% {
+        width: 0%;
+    } 100% {
+        width: 60%;
+    }
 }
 
 .active-brand img {
     opacity: 1;
 }
+
+

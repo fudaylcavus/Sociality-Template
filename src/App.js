@@ -13,37 +13,58 @@ function App() {
 
   const [data, setData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [hasError, setHasError] = useState(false);
+  const [activeBrand, setActiveBrand] = useState(2);
 
   const handleDateView = date => {
       const args = date.split("-");
       return `${args[2]} ${getMonthNameByNum(Number(args[1]))} ${args[0]}`  
   }
 
+  const isFetchSuccessed = () => Math.random() >= .3;
+
   const loadPosts = async () => {
+    setHasError(false);
     setIsLoading(true);
+    await new Promise(resolve => {
+      setTimeout(() => {
+        console.log('fake load worked')
+        resolve();
+      }, (Math.random() * 3) * 1000)})
+    
     try {
       let response = await fetch('./data.json', {
         headers: {
           'Content-Type': 'application/json'
         }
       });
+      if (!isFetchSuccessed()) {
+        throw new Error("unexpected error")
+      }
       if (response.ok) {
         let data = await response.json();
         setData(data);
+        setIsLoading(false)
       }
     } catch (err) {
+      setHasError(true);
+      setIsLoading(false);
       console.log(err);
     }
-    setIsLoading(false)
+    
   }
 
   useEffect(() => {
-    loadPosts();
-  }, [])
+    loadPosts()
+  }, [activeBrand])
 
   return (
     <div className="App">
-      <Sidebar/>
+      <div className="mobile">
+        <i className="fas fa-mobile-alt"></i>
+        You can't view on Phone!
+      </div>
+      <Sidebar activeBrand={activeBrand} setActiveBrand={setActiveBrand}/>
       <main>
         <div className="color-infos">
           <div className="color-info">
@@ -77,10 +98,15 @@ function App() {
         </div>
 
         {isLoading 
-        ? (<div>Loading...</div>)
-        : (
+        ? (
+          <div className="center-info loading">
+            <i className="fas fa-spinner"></i>
+          </div>
+          )
+        : !hasError 
+          ? (
           <div>
-            {Object.keys(data.posts_by_date).reverse().map((date, index) => {
+            {Object.keys(data?.posts_by_date).reverse().map((date, index) => {
               return (
                 <div key={index}>
                   <div className="posts-date">{handleDateView(date)}</div>
@@ -90,6 +116,14 @@ function App() {
             })}
           </div>
           )
+        : (
+        <div className="center-info error">
+          <i className="fas fa-exclamation-triangle"></i>
+          <br/>
+          {/* Test for situations,which create problem */}
+          U4580-404
+        </div>
+        )
         }
         
       </main>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Sidebar.css';
 
 
@@ -6,13 +6,11 @@ const fakeBrands = [
     { id: 0, image: 'https://cdn.icon-icons.com/icons2/2108/PNG/512/facebook_icon_130940.png', notificationCount: 0 },
     { id: 1, image: 'https://image.flaticon.com/icons/png/512/124/124021.png', notificationCount: 99 },
     { id: 2, image: 'https://cdn.icon-icons.com/icons2/2108/PNG/512/facebook_icon_130940.png', notificationCount: 0 },
-    { id: 3, image: 'https://image.flaticon.com/icons/png/512/124/124021.png', notificationCount: 0},
-    
+    { id: 3, image: 'https://image.flaticon.com/icons/png/512/124/124021.png', notificationCount: 0 },
+
 ]
 
-export const Sidebar = () => {
-    const [activeBrand, setActiveBrand] = useState(2);
-
+export const Sidebar = ({activeBrand, setActiveBrand}) => {
 
     useEffect(() => {
         //to make accordion menu items, active or not, click listener and its funcitons are added.
@@ -30,13 +28,13 @@ export const Sidebar = () => {
                     if (!iconSpan.className.includes("notification-count")) {
                         iconSpan.innerHTML = "+"
                     }
-                    
+
                 } else {
                     panel.style.maxHeight = panel.scrollHeight + "px";
                     if (!iconSpan.className.includes("notification-count")) {
                         iconSpan.innerHTML = "-"
                     }
-                    
+
 
                 }
             });
@@ -51,7 +49,14 @@ export const Sidebar = () => {
             </div>
             <div className="subsections">
                 <div className="brands">
-                    {fakeBrands.map((brand, index) => <Brand key={index} brand={brand} isActive={activeBrand === brand.id} />)}
+                    {fakeBrands.map((brand, index) => {
+                        return <Brand 
+                                key={index} 
+                                brand={brand} 
+                                setActiveBrand={setActiveBrand} 
+                                isActive={activeBrand === brand.id} />
+                        })
+                    }
                 </div>
                 <div className="menu">
                     <ul className="menu-items">
@@ -135,10 +140,15 @@ export const Sidebar = () => {
     )
 }
 
-const Brand = ({ brand, isActive }) => {
+const Brand = ({ brand, isActive, setActiveBrand }) => {
+
+    const handleClick = () => {
+        if (isActive) return;
+        setActiveBrand(brand.id);
+    }
+
     return (
-        <div className={"brand" + (isActive ? " active-brand" : "")}>
-            <div></div>
+        <div onClick={handleClick} className={"brand" + (isActive ? " active-brand" : "")}>
             {brand.notificationCount ? <div className="brand-notification">{brand.notificationCount}</div> : ""}
             <img src={brand.image} alt="brand logo" />
         </div>
